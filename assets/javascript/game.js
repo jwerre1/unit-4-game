@@ -31,7 +31,10 @@ function newRound() {
     // }
     for (var i = 0; i < crystalPictures.length; i++) {
         var imageCrystal = $("<img>");
+        //for css
         imageCrystal.addClass("crystal-image");
+        //so the crystal values are reset with each round (images also reset, though this does not change anything)
+        imageCrystal.addClass("resetCrystal" + [i]);
         imageCrystal.attr("src", crystalPictures[i]);
         imageCrystal.attr("data-crystalvalue", crystalValue[i]);
         $("#crystals").append(imageCrystal);
@@ -44,6 +47,11 @@ function subRound() {
     targetNumber = Math.floor(Math.random() * 102) + 19;
     $("#target-number").text("Target Number: " + targetNumber);
     // crystalCalc();
+    for (j = 0; j < crystalPictures.length; j++) {
+        crystalValue[j] = Math.floor(Math.random() * 12) + 1;
+        $(".resetCrystal" + [j]).attr("data-crystalvalue", crystalValue[j])
+            console.log(crystalValue)
+    }
     for (var i = 0; i < crystalPictures.length; i++) {
         var imageCrystal = $("<img>");
         imageCrystal.removeAttr("data-crystalvalue");
@@ -53,6 +61,7 @@ function subRound() {
         $("#crystals").append(imageCrystal);
     }
 }
+
 
 // added to newRound()
 // function assignment() {
@@ -93,6 +102,8 @@ $(".crystal-image").on("click", function() {
       }
   
     });
+
+
 
 
 
