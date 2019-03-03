@@ -8,6 +8,17 @@ var score = 0;
 var targetNumber;
 var crystalPictures = ["assets/images/gemOne.jpg", "assets/images/gemTwo.jpg", "assets/images/gemThree.jpg", "assets/images/gemFour.jpg"];
 
+var instructions = [
+    "You will be given a random number at the start of the game.",
+    "There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.",
+    "You win the game by matching your total score to the random number; you lose the game if your total score goes above the random number.",
+    "The value of each crystal is hidden from you until you click on it.",
+    "Each time the game restarts, the vaule of each crystal will change."
+];
+
+
+//FUNCTIONS
+
 function crystalCalc() {
     // crystalValue.length = 0;
     for (i = 0; i < crystalPictures.length; i++) {
@@ -32,7 +43,7 @@ function newRound() {
     for (var i = 0; i < crystalPictures.length; i++) {
         var imageCrystal = $("<img>");
         //for css
-        imageCrystal.addClass("crystal-image");
+        imageCrystal.addClass("crystal-image border border-dark");
         //so the crystal values are reset with each round (images also reset, though this does not change anything)
         imageCrystal.addClass("resetCrystal" + [i]);
         imageCrystal.attr("src", crystalPictures[i]);
@@ -55,6 +66,7 @@ function subRound() {
     for (var i = 0; i < crystalPictures.length; i++) {
         var imageCrystal = $("<img>");
         imageCrystal.removeAttr("data-crystalvalue");
+        // not needed, otherwise four more crystals appear with each round
         // imageCrystal.addClass("crystal-image");
         // imageCrystal.attr("src", crystalPictures[i]);
         imageCrystal.attr("data-crystalvalue", crystalValue[i]);
@@ -62,25 +74,39 @@ function subRound() {
     }
 }
 
+function instruct() {
+    for (i = 0; i <instructions.length; i++) {
+        $("#instructions").append("<p>" + instructions[i] + "</p>");
+    }
+}
 
-// added to newRound()
-// function assignment() {
-//     for (var i = 0; i < crystalPictures.length; i++) {
-//         var imageCrystal = $("<img>");
-//         imageCrystal.addClass("crystal-image");
-//         imageCrystal.attr("src", crystalPictures[i]);
-//         imageCrystal.attr("data-crystalvalue", crystalValue[i]);
-//         $("#crystals").append(imageCrystal);
-//     }
-// }
+// BEGINNING OF GAME
+$("#title").text("Crystal Collector");
+$("#title").addClass("display-3 lailaFont text-center text-primary");
 
-//beginning of game
+$("#winloseAlert").addClass("lailaFont h1 text-primary");
+$("#winloseAlert").text("Click any crystal to begin.");
+
+
+$("#target-number").addClass("lailaFont h3");
+
+$("#score").text("Score: " + 0);
+$("#score").addClass("lailaFont h3");
+
 $("#win-count").text("Wins: " + wins);
+$("#win-count").addClass("lailaFont h3");
 $("#loss-count").text("Losses: " + losses);
+$("#loss-count").addClass("lailaFont h3");
+instruct();
+$("#instructions").addClass("text-center luckiestFont")
+
+
 newRound();
 // assignment();
 
 $(".crystal-image").on("click", function() {
+    //allows the winloseAlert to be hidden, while also not alerting the spacing of the page
+    $("#winloseAlert").css("visibility", "hidden")
     var crystalValue = ($(this).attr("data-crystalvalue"));
     crystalValue = parseInt(crystalValue);
     score += crystalValue;
@@ -88,6 +114,9 @@ $(".crystal-image").on("click", function() {
     $("#score").text("Score: " + score);
 
     if (score === targetNumber) {
+        $("#winloseAlert").css("visibility", "visible")
+        $("#winloseAlert").removeClass("text-danger");
+        $("#winloseAlert").addClass("text-success");
         $("#winloseAlert").text("You win!");
         wins++;
         $("#win-count").text("Wins: " + wins);
@@ -95,7 +124,10 @@ $(".crystal-image").on("click", function() {
       }
   
       else if (score >= targetNumber) {
-        $("#winloseAlert").text("You lose.");
+        $("#winloseAlert").css("visibility", "visible")
+        $("#winloseAlert").removeClass("text-success");
+        $("#winloseAlert").addClass("text-danger");
+        $("#winloseAlert").text("You lose. Try again!");
         losses++;
         $("#loss-count").text("Losses: " + losses);
         subRound();

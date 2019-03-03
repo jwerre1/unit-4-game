@@ -1,4 +1,17 @@
 .crystal-image {
-    width: 200px;
-    height: 200px;
-  }
+    width: 150px;
+    height: 150px;
+}
+
+.lailaFont {
+    font-family: 'Laila', serif;
+}
+
+.luckiestFont {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 20px;
+}
+
+.lightSlate {
+    background-color: rgba(119, 136, 153, 0.582);
+}
