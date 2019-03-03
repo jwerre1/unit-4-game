@@ -115,9 +115,9 @@ $(".crystal-image").on("click", function() {
 
     if (score === targetNumber) {
         $("#winloseAlert").css("visibility", "visible")
-        $("#winloseAlert").removeClass("text-danger");
-        $("#winloseAlert").addClass("text-success");
-        $("#winloseAlert").text("You win!");
+        $("#winloseAlert").removeClass("text-vermillion");
+        $("#winloseAlert").addClass("sunshineFont");
+        $("#winloseAlert").text("You win! Keep it up!");
         wins++;
         $("#win-count").text("Wins: " + wins);
         subRound();
@@ -125,8 +125,8 @@ $(".crystal-image").on("click", function() {
   
       else if (score >= targetNumber) {
         $("#winloseAlert").css("visibility", "visible")
-        $("#winloseAlert").removeClass("text-success");
-        $("#winloseAlert").addClass("text-danger");
+        $("#winloseAlert").removeClass("sunshineFont");
+        $("#winloseAlert").addClass("text-vermillion");
         $("#winloseAlert").text("You lose. Try again!");
         losses++;
         $("#loss-count").text("Losses: " + losses);
@@ -134,13 +134,4 @@ $(".crystal-image").on("click", function() {
       }
   
     });
-
-
-
-
-
-console.log(targetNumber);
-console.log(crystalValue);
-
-
 })
