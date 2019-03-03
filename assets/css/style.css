@@ -1,3 +1,7 @@
+body {
+    background-color: #4ABDAC;
+}
+
 .crystal-image {
     width: 150px;
     height: 150px;
@@ -8,10 +12,18 @@
 }
 
 .luckiestFont {
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 20px;
+    font-family: 'B612 Mono', monospace;
+    font-size: 18px;
 }
 
-.lightSlate {
-    background-color: rgba(119, 136, 153, 0.582);
+.text-vermillion {
+    color: #FC4A1A;
+}
+
+.greyFont {
+    color: #DFDCE3;
+}
+
+.sunshineFont {
+    color: rgb(247, 172, 22);
 }

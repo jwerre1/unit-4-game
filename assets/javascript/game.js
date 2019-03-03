@@ -82,23 +82,23 @@ function instruct() {
 
 // BEGINNING OF GAME
 $("#title").text("Crystal Collector");
-$("#title").addClass("display-3 lailaFont text-center text-primary");
+$("#title").addClass("display-3 lailaFont text-center text-vermillion");
 
-$("#winloseAlert").addClass("lailaFont h1 text-primary");
+$("#winloseAlert").addClass("lailaFont h1 text-vermillion");
 $("#winloseAlert").text("Click any crystal to begin.");
 
 
-$("#target-number").addClass("lailaFont h3");
+$("#target-number").addClass("lailaFont h3 sunshineFont");
 
 $("#score").text("Score: " + 0);
-$("#score").addClass("lailaFont h3");
+$("#score").addClass("lailaFont h3 sunshineFont");
 
 $("#win-count").text("Wins: " + wins);
-$("#win-count").addClass("lailaFont h3");
+$("#win-count").addClass("lailaFont h3 sunshineFont");
 $("#loss-count").text("Losses: " + losses);
-$("#loss-count").addClass("lailaFont h3");
+$("#loss-count").addClass("lailaFont h3 sunshineFont");
 instruct();
-$("#instructions").addClass("text-center luckiestFont")
+$("#instructions").addClass("text-center luckiestFont greyFont")
 
 
 newRound();
