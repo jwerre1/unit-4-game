@@ -7,13 +7,14 @@ var losses = 0;
 var score = 0;
 var targetNumber;
 var crystalPictures = ["assets/images/gemOne.jpg", "assets/images/gemTwo.jpg", "assets/images/gemThree.jpg", "assets/images/gemFour.jpg"];
+var winStreak = 0;
 
 var instructions = [
     "You will be given a random number at the start of the game.",
     "There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.",
     "You win the game by matching your total score to the random number; you lose the game if your total score goes above the random number.",
     "The value of each crystal is hidden from you until you click on it.",
-    "Each time the game restarts, the vaule of each crystal will change."
+    "Each time a new round begins, the vaule of each crystal will change."
 ];
 
 
@@ -82,9 +83,9 @@ function instruct() {
 
 // BEGINNING OF GAME
 $("#title").text("Crystal Collector");
-$("#title").addClass("display-3 lailaFont text-center text-vermillion");
+$("#title").addClass("display-4 lailaFont text-center text-vermillion");
 
-$("#winloseAlert").addClass("lailaFont h1 text-vermillion");
+$("#winloseAlert").addClass("lailaFont h2 text-vermillion");
 $("#winloseAlert").text("Click any crystal to begin.");
 
 
@@ -95,6 +96,9 @@ $("#score").addClass("lailaFont h3 sunshineFont");
 
 $("#win-count").text("Wins: " + wins);
 $("#win-count").addClass("lailaFont h3 sunshineFont");
+
+$("#win-streak").addClass("lailaFont h3 text-vermillion");
+
 $("#loss-count").text("Losses: " + losses);
 $("#loss-count").addClass("lailaFont h3 sunshineFont");
 instruct();
@@ -120,6 +124,9 @@ $(".crystal-image").on("click", function() {
         $("#winloseAlert").text("You win! Keep it up!");
         wins++;
         $("#win-count").text("Wins: " + wins);
+        winStreak++;
+        $("#win-streak").text("Win Streak: " + winStreak);
+
         subRound();
       }
   
@@ -130,6 +137,8 @@ $(".crystal-image").on("click", function() {
         $("#winloseAlert").text("You lose. Try again!");
         losses++;
         $("#loss-count").text("Losses: " + losses);
+        winStreak = 0;
+        $("#win-streak").text("");
         subRound();
       }
   
