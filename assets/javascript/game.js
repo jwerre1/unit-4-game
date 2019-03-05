@@ -20,35 +20,33 @@ var instructions = [
 
 //FUNCTIONS
 
+//Assigns a randomly assigned value to each crystal. 
 function crystalCalc() {
-    // crystalValue.length = 0;
     for (i = 0; i < crystalPictures.length; i++) {
         crystalValue[i] = Math.floor(Math.random() * 12) + 1;
-        // crystalValue.push(worth);
     }
- 
-    // if (crystalValue[0] % 2 === crystalValue[1] % 2 === crystalValue[2] % 2 === crystalValue[3] % 2 === 100) {
-    //     crystalCalc();
-    // }
 
 }
 
+//Initially sets-up the page.
 function newRound() {
     targetNumber = Math.floor(Math.random() * 102) + 19;
     $("#target-number").text("Target Number: " + targetNumber);
     crystalCalc();
-    // for (j = 0; j < crystalPictures.length; j++) {
-    //     var worth = Math.floor(Math.random() * 12) + 1;
-    //     crystalValue.push(worth);
-    // }
+
+    //For each picture,
     for (var i = 0; i < crystalPictures.length; i++) {
+        //assign them an element "Img".
         var imageCrystal = $("<img>");
-        //for css
-        imageCrystal.addClass("crystal-image border border-dark");
-        //so the crystal values are reset with each round (images also reset, though this does not change anything)
+        //add CSS classes
+        imageCrystal.addClass("crystal-image");
+        //Needed to reset crystal values with each round (images also reset, though this does not change anything)
         imageCrystal.addClass("resetCrystal" + [i]);
+        //Add picture.
         imageCrystal.attr("src", crystalPictures[i]);
+        //Assign each picture its value.
         imageCrystal.attr("data-crystalvalue", crystalValue[i]);
+        //Adds pictures to the page. 
         $("#crystals").append(imageCrystal);
     }
 }
@@ -58,7 +56,6 @@ function subRound() {
     $("#score").text("Score: " + score);
     targetNumber = Math.floor(Math.random() * 102) + 19;
     $("#target-number").text("Target Number: " + targetNumber);
-    // crystalCalc();
     for (j = 0; j < crystalPictures.length; j++) {
         crystalValue[j] = Math.floor(Math.random() * 12) + 1;
         $(".resetCrystal" + [j]).attr("data-crystalvalue", crystalValue[j])
@@ -67,14 +64,12 @@ function subRound() {
     for (var i = 0; i < crystalPictures.length; i++) {
         var imageCrystal = $("<img>");
         imageCrystal.removeAttr("data-crystalvalue");
-        // not needed, otherwise four more crystals appear with each round
-        // imageCrystal.addClass("crystal-image");
-        // imageCrystal.attr("src", crystalPictures[i]);
         imageCrystal.attr("data-crystalvalue", crystalValue[i]);
         $("#crystals").append(imageCrystal);
     }
 }
 
+//Populate instructions. 
 function instruct() {
     for (i = 0; i <instructions.length; i++) {
         $("#instructions").append("<p>" + instructions[i] + "</p>");
@@ -94,12 +89,10 @@ $("#target-number").addClass("lailaFont h3 sunshineFont");
 $("#score").text("Score: " + 0);
 $("#score").addClass("lailaFont h3 sunshineFont");
 
-$("#win-count").text("Wins: " + wins);
 $("#win-count").addClass("lailaFont h3 sunshineFont");
 
 $("#win-streak").addClass("lailaFont h3 text-vermillion");
 
-$("#loss-count").text("Losses: " + losses);
 $("#loss-count").addClass("lailaFont h3 sunshineFont");
 
 instruct();
@@ -107,7 +100,6 @@ $("#instructions").addClass("text-center luckiestFont greyFont")
 
 
 newRound();
-// assignment();
 
 $(".crystal-image").on("click", function() {
     //allows the winloseAlert to be hidden, while also not alerting the spacing of the page
@@ -118,6 +110,7 @@ $(".crystal-image").on("click", function() {
         console.log(score);
     $("#score").text("Score: " + score);
 
+    // check if you won
     if (score === targetNumber) {
         $("#winloseAlert").css("visibility", "visible")
         $("#winloseAlert").removeClass("text-vermillion");
@@ -127,10 +120,11 @@ $(".crystal-image").on("click", function() {
         $("#win-count").text("Wins: " + wins);
         winStreak++;
         $("#win-streak").text("Win Streak: " + winStreak);
-
+        // run new round
         subRound();
       }
-  
+      
+      // check if you lost
       else if (score >= targetNumber) {
         $("#winloseAlert").css("visibility", "visible")
         $("#winloseAlert").removeClass("sunshineFont");
@@ -140,6 +134,7 @@ $(".crystal-image").on("click", function() {
         $("#loss-count").text("Losses: " + losses);
         winStreak = 0;
         $("#win-streak").text("");
+        // run new round
         subRound();
       }
   
